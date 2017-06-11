@@ -12,13 +12,13 @@ import Playground from 'modules/playground';
 
 
 const navigationDirective = [
+    {to:'/playground', displayText:'playground'},
     {to:'/', displayText:'Home'},
     {to:'/users', displayText:'User review'},
     {to:'/font-test', displayText:'Font test'},
     {to:'/lazy-load', displayText:'Lazy load'},
     {to:'/todos/all', displayText:'Todo'},
     {to:'/rest', displayText:'Rest'},
-    {to:'/playground', displayText:'playground'}
 ];
 
 
