@@ -1,0 +1,104 @@
+{
+  "name": "web-app-demo--client--react-redux",
+  "version": "1.0.0",
+  "description": "Rect/Redux project setup",
+  "main": "webpack.config.js",
+  "scripts": {
+    "test": "jest --verbose --watch",
+    "test:nocache": "jest --verbose --watch --no-cache",
+    "start": "node server.js",
+    "deploy" : "git push heroku deploy:master",
+    "dev": "webpack-dev-server --env.dev --no-info",
+    "dev:info": "webpack-dev-server --env.dev",
+    "dev:debug": "CONSOLE_LOG=true webpack-dev-server --env.dev --no-info --define process.env.debug='true'",
+    "build": "webpack --env.prod -p --define process.env.prod='true'",
+    "build:debug": "CONSOLE_LOG=true webpack --env.prod --define process.env.prod='true' --define process.env.debug='true'",
+    "build:json": "webpack --env.prod --define process.env.prod='true' --json > build-analytic.json",
+    "prebuild": "rimraf dist",
+    "prebuild:debug": "rimraf dist",
+    "prebuild:json": "rimraf dist",
+    "clean": "rimraf dist",
+    "debug": "node-nightly --inspect-brk node_modules/.bin/webpack --env.debug"
+  },
+  "keywords": [
+    "react",
+    "redux",
+    "set-up"
+  ],
+  "author": "Apollo Tang <tang.apollo@gmail.com>",
+  "license": "BSD-3-Clause",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ApolloTang/web-app-demo--client--react-redux"
+  },
+  "devDependencies": {
+    "babel-core": "^6.22.1",
+    "babel-loader": "^6.2.10",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-es2015": "^6.22.0",
+    "babel-preset-es2016": "^6.22.0",
+    "babel-preset-react": "^6.22.0",
+    "babel-preset-stage-2": "^6.22.0",
+    "css-loader": "^0.26.1",
+    "enzyme": "^2.8.2",
+    "enzyme-to-json": "^1.5.1",
+    "extract-text-webpack-plugin": "^2.1.0",
+    "file-loader": "^0.11.1",
+    "html-webpack-plugin": "^2.26.0",
+    "identity-obj-proxy": "^3.0.0",
+    "inline-manifest-webpack-plugin": "^3.0.1",
+    "jest": "^19.0.2",
+    "jest-enzyme": "^3.0.1",
+    "less": "^2.7.2",
+    "less-loader": "^2.2.3",
+    "nock": "^9.0.13",
+    "progress-bar-webpack-plugin": "^1.9.3",
+    "react-test-renderer": "^15.5.4",
+    "redux-logger": "^2.7.4",
+    "redux-mock-store": "^1.2.3",
+    "rimraf": "^2.5.4",
+    "style-loader": "^0.13.1",
+    "webpack": "^2.4.1",
+    "webpack-config-utils": "^2.3.0",
+    "webpack-dev-server": "^2.4.4"
+  },
+  "dependencies": {
+    "babel-plugin-transform-bluebird": "^0.1.1",
+    "bluebird": "^3.5.0",
+    "classnames": "^2.2.5",
+    "compression": "^1.6.2",
+    "connected-react-router": "4.1.0",
+    "express": "^4.15.2",
+    "isomorphic-fetch": "^2.2.1",
+    "lodash": "^4.17.4",
+    "numeral": "^2.0.6",
+    "prop-types": "^15.5.8",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4",
+    "react-redux": "^5.0.4",
+    "react-router-config": "1.0.0-beta3",
+    "react-router-dom": "^4.1.1",
+    "redux": "^3.6.0",
+    "redux-thunk": "^2.2.0"
+  },
+  "jest": {
+    "setupTestFrameworkScriptFile": "./node_modules/jest-enzyme/lib/index.js",
+    "moduleFileExtensions": [
+      "js",
+      "jsx"
+    ],
+    "moduleDirectories": [
+      "node_modules",
+      "src"
+    ],
+    "testPathIgnorePatterns": [
+      "<rootDir>/dist/",
+      "<rootDir>/node_modules/",
+      "<rootDir>/src/modules/demo-unit-test-action"
+    ],
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
+      "\\.(css|less)$": "identity-obj-proxy"
+    }
+  }
+}

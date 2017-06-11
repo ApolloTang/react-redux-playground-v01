@@ -1,0 +1,113 @@
+
+client router
+
+users/:id
+users/:id/edit
+users/:id/new
+
+users/:id/new
+
+
+
+API router
+
+``````````
+
+cat_1
+  {
+    _id: id_user1,
+    displayName: 'Mark Zuckerber'
+  }
+
+GET api/users-catelog
+    respond payload: [ { cat_1 }, { cat_2 }, ... all users ]
+
+-----------
+
+user_1
+  {
+    _id: userId_1,
+    userName: "markZuckerberg",
+    reviewers: [ reviewId_1, reviewId_2, .... ],
+    reviewersAssignment: id1_assignment   //<--- onPost, server will create {assignemnt} and links its id
+  }
+
+GET api/users
+    respond payload: [ { user_1 }, { user_2 }, ... all users ]
+
+GET api/users/:id1
+    respond payload: { user_1 }
+
+DELETE api/users/:id1
+    respond payload: { user_1 }
+
+PUT api/users/:id1
+    resquest payload: { user_1 }
+    respond payload: { user_1 }
+
+PATCH api/users/:id1
+    resquest payload: { user_1 }
+    respond payload: { user_1 }
+
+POST api/users
+    request payload: { user_noId }
+    respond payload: { user_1 }
+
+    * onPost, server will create {assignemnt} ?
+
+POST api/users/batch-get
+    request payload: [ id_user2, id_user3 ]
+    respond payload: [ { user_2 }, { user_3 } ]
+
+---------------------------------------
+
+review_1
+  {
+    _id: id_review1,
+    reviewee: userId_1,
+    reviewer: userId_2,
+    content: 'he is awesome',
+  }
+.
+GET api/reviews
+    respond payload: [ { review1 }, { review2 }, ... all reviews ]
+
+GET api/reviews/:id_review1
+    respond payload: { review_1 }
+
+DELETE api/reviews/:id1
+    respond payload: { review_1 }
+
+PUT api/reviews/:id1
+    request payload: { review_1 }
+    respond payload: { review_1 }
+
+PATCH api/reviews/:id1
+    request payload: { review_1 }
+    respond payload: { review_1 }
+
+POST api/reviews
+    request payload: { review_noId }
+    respond payload: { review_1 }
+
+POST api/reviews/batch-get
+    request payload: [ reviewId_1, reviewId_2 ]
+    respond payload: [ { review_1 }, { review_2 } ]
+
+-------------------------------------
+
+assignment:
+  {
+    _id: id1_assignment,
+    reviewers: [
+      {user:id_user2, review: null },
+      {user:id_user3, review: id_review1},
+    ],
+  }
+
+GET api/assignment/:id
+    respond payload: { assignement_1 }
+
+PATCH api/assignment/:id
+    resquest payload: { assignement_1 }
+    respond payload: { assignement_1 }

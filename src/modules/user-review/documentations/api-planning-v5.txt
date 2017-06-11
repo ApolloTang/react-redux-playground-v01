@@ -1,0 +1,141 @@
+
+
+
+
+
+
+            ┌───────────────────────────────────┐
+            │REVIEWS                            │
+┌──────────▶│--------------------------------   │ 1                    ┌─────────────────────────────────────┐
+│           │reviewee: ObjectId, {ref: USER}  ──┼─────────────────────▶│USER                                 │
+│           │reviewer: OBjectId, {ref: USER}  ──┼─────────────────────▶│-----------------------------------  │
+│           │review: String                     │ 1                    │name: string                         │ 0..*
+│           └───────────────────────────────────┘                      │reviews: [{ObjectId, {ref:Reviews}]  ├────────┐
+│                                                                      └─────────────────────────────────────┘        │
+│                                                                                                                     │
+│                                                                                                                     │
+│                                                                                                                     │
+│                                                                                                                     │
+│                                                                                                                     │
+└────────────────────────────────── point to review of itself by other user ──────────────────────────────────────────┘
+
+
+
+
+
+
+
+API router
+
+``````````
+
+UserCatelog
+  {
+    _id: id_user1,
+    displayName: 'Mark Zuckerber'
+  }
+
+GET api/users-catelog
+    respond payload: [ { cat_1 }, { cat_2 }, ... all users ]
+
+-----------
+
+User
+  {
+    _id: userId_1,
+    userName: "markZuckerberg",
+    reviews: [ id_review1, id_review2, ...]
+  }
+
+GET api/users
+    respond payload: [ { user_1 }, { user_2 }, ... all users ]
+
+GET api/users/:id1
+    respond payload: { user_1 }
+
+DELETE api/users/:id1
+    respond payload: { user_1 }
+
+PUT api/users/:id1
+    resquest payload: { user_1 }
+    respond payload: { user_1 }
+
+PATCH api/users/:id1
+    resquest payload: { user_1 }
+    respond payload: { user_1 }
+
+POST api/users
+    request payload: { user_noId }
+    respond payload: { user_1 }
+
+POST api/users/batch-get
+    request payload: [ id_user2, id_user3 ]
+    respond payload: [ { user_2 }, { user_3 } ]
+
+---------------------------------------
+
+Review
+  {
+    _id: id_review1,
+    reviewee: userId_1,
+    reviewer: userId_2,
+    content: 'he is awesome',
+  }
+
+GET api/reviews
+    respond payload: [ { review1 }, { review2 }, ... all reviews ]
+
+GET api/reviews/:id_review1
+    respond payload: { review_1 }
+
+DELETE api/reviews/:id1
+    respond payload: { review_1 }
+
+PUT api/reviews/:id1
+    request payload: { review_1 }
+    respond payload: { review_1 }
+
+PATCH api/reviews/:id1
+    request payload: { review_1 }
+    respond payload: { review_1 }
+
+POST api/reviews
+    request payload: { review_noId }
+    respond payload: { review_1 }
+
+POST api/reviews/batch-get
+    request payload: [ reviewId_1, reviewId_2 ]
+    respond payload: [ { review_1 }, { review_2 } ]
+
+
+Get api/reviews/?reviewerId=1234&revieweeId=5678
+    respond payload: { review_1 }
+
+
+POST api/reviews/assign-reviewer
+    request payload:
+    {
+      id_reviewee: id_user1,
+      ids_reviewer: [ id_user2, id_user3, id_user4, ...]
+    }
+    respond payload: [ { review_1 }, { review_2 }, {review_3} ... ]
+
+* POST api/reviews/assign-reviewee
+*     request payload:
+*     {
+*       id_reviewer: id_user1,
+*       ids_reviewee: [ id_user2, id_user3, id_user4, ...]
+*     }
+*     respond payload: [ { review_1 }, { review_2 }, {review_3} ... ]
+
+-------------------------------------
+
+Get api/users?reviewerOf=id_reviewee
+    respond payload [ {reviewer1, reviewer2 ...}]
+
+Get api/users?revieweeOf=id_reviewer
+    respond payload [ {reviewer1, reviewer2 ...}]
+
+------------------------------------
+
+
