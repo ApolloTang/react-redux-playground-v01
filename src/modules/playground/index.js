@@ -10,7 +10,7 @@ class ModuleRoot extends Component {
   render() {
     return (
     <div className = { `module-a ${style['module-style']}` } >
-      <p>playground </p>
+      <p>playground</p>
     </div>
     );
   }
