@@ -9,9 +9,11 @@ import Todos from 'modules/todos';
 import Rest from 'modules/rest-testing';
 import UserReview from 'modules/user-review';
 import Playground from 'modules/playground';
+import CssTransition from 'modules/css-transition';
 
 
 const navigationDirective = [
+    {to:'/css-transition', displayText:'css-transition'},
     {to:'/playground', displayText:'playground'},
     {to:'/', displayText:'Home'},
     {to:'/users', displayText:'User review'},
@@ -25,6 +27,7 @@ const navigationDirective = [
 
 const routes = (
   <Switch>
+    <Route path="/css-transition" component={CssTransition} />
     <Route exact path="/" component={()=>(<div>home</div>)} />
     {/* <Route exact path="/" render={()=>( <Redirect to="/todos/all"/>)} /> */}
     {/* <Route exact path="/" render={()=>( <Redirect to="/users"/>)} /> */}
